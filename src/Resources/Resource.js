@@ -8,15 +8,18 @@ module.exports = class {
         this.filePath = filePath;
     }
 
-    get url() {
-        return './resources' + this.filePath.replace(
+    get name() {
+        return this.filePath.replace(
             this.manager.basePath,
             ''
-        )
-        .replace('\\', '/');
+        );
     }
 
-    dir() {
+    get url() {
+        return './resources' + this.name.replace(/\\/g, '/');
+    }
+
+    get dir() {
         return path.dirname(this.filePath);
     }
 

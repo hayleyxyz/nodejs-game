@@ -3,14 +3,10 @@ module.exports = class extends GameObjects.GameObject {
     constructor(game) {
         super(game);
 
-        this.sprites = this.game.resources.make(
-            Graphics.SpriteSheet,
-            'sheets/player/player.json'
+        this.sprites = new Graphics.SpriteSheet(
+            this.game.resources.get('sheets/player/player.json'),
+            this.game.resources.get('sheets/player/player.png')
         );
-
-        console.log(this.sprites);
-
-        console.log();
 
         this.position = new Vector2();
     }
@@ -20,7 +16,11 @@ module.exports = class extends GameObjects.GameObject {
     }
 
     draw(renderer) {
-
+        this.game.renderer.drawSpriteSheet(
+            this.sprites,
+            'player-1.png',
+            new Vector2(100, 100)
+        );
     }
 
 };

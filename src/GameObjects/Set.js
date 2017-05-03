@@ -10,8 +10,6 @@ module.exports = class extends Set {
             throw new TypeError();
         }
 
-        value.game = this.game;
-
         super.add(value);
     }
 

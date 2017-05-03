@@ -5,10 +5,6 @@ module.exports = class {
 
     constructor(basePath) {
         this.basePath = basePath;
-
-        this.factories = new Set([
-            new Resources.Types.SpriteSheet(),
-        ]);
     }
 
     resolve(name) {
@@ -16,26 +12,20 @@ module.exports = class {
         return file;
     }
 
-    readSync(name) {
-        return fs.readFileSync(
-            this.resolve(name)
-        );
+    has(name) {
+        let file = this.resolve(name);
+        return fs.existsSync(file);
     }
 
-    make(type, name) {
-        let content = this.readSync(name).toString('utf8');
-        let result = null;
+    get(name) {
+        if(this.has(name)) {
+            let file = this.resolve(name);
 
-        this.factories.forEach(factory => {
-            factory.makes.forEach(makesType => {
-                if(makesType === type) {
-                    result = factory.make(content);
-                    return false;
-                }
-            });
-        });
-
-        return result;
+            return new Resources.Resource(
+                this,
+                file
+            );
+        }
     }
 
 };

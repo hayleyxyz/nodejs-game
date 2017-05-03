@@ -29,6 +29,18 @@ module.exports = class {
         this.context.fillText(text, position.x, position.y);
     }
 
+    drawSpriteSheet(sheet, frameId, position) {
+        let frame = sheet.getFrame(frameId);
+
+        this.context.drawImage(
+            sheet.image,
+            frame.x, frame.y, // sx, sy,
+            frame.w, frame.h, // sWidth, sHeight,
+            position.x, position.y, // dx, dy,
+            frame.w, frame.h // dWidth, dHeight
+        );
+    }
+
     onResize() {
         this.element.width = window.innerWidth;
         this.element.height = window.innerHeight;
