@@ -74,6 +74,22 @@ module.exports = class extends GameObjects.GameObject {
                 }
             }
         }
+
+        for(let i = 0; i < this.descriptor.layers.length; i++) {
+            let layer = this.descriptor.layers[i];
+            if(layer.name === 'wall') {
+                layer.objects.forEach(obj => {
+                    if(obj.polyline) {
+                        let points = obj.polyline.map(p => new Vector2(p.x, p.y));
+                        renderer.drawPolygon(new Graphics.Polygon(points), new Vector2(obj.x, obj.y));
+                    }
+                    else {
+                        let rect = new Graphics.Rect(obj.width, obj.height);
+                        renderer.drawPolygon(rect, new Vector2(obj.x, obj.y));
+                    }
+                });
+            }
+        }
     }
 
 };

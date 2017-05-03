@@ -49,6 +49,28 @@ module.exports = class {
         );
     }
 
+    drawPolygon(polygon, position) {
+        this.context.beginPath();
+
+        this.context.moveTo(position.x, position.y);
+
+        polygon.points.forEach(point => {
+            this.context.lineTo(
+                position.x + point.x,
+                position.y + point.y
+            );
+        });
+
+        this.context.closePath();
+
+        this.context.fillStyle = 'rgba(0, 255, 0, 0.2)';
+        this.context.fill();
+    }
+
+    drawRect() {
+        this.context.rect()
+    }
+
     onResize() {
         this.element.width = window.innerWidth;
         this.element.height = window.innerHeight;
