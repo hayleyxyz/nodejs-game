@@ -15,6 +15,8 @@ module.exports = class extends GameObjects.GameObject {
             let tilesResource = levelResource.getRelative(tileset.source);
             this.loadTileSet(tileset.firstgid, tilesResource);
         });
+
+        this.addColliders();
     }
 
     get width() {
@@ -23,6 +25,28 @@ module.exports = class extends GameObjects.GameObject {
 
     get height() {
         return this.descriptor.height;
+    }
+
+    addColliders() {
+        for(let i = 0; i < this.descriptor.layers.length; i++) {
+            let layer = this.descriptor.layers[i];
+            if(layer.name === 'wall') {
+                layer.objects.forEach(obj => {
+                    if(obj.polyline) {
+                        /* Skip for now */
+                    }
+                    else {
+                        this.addComponent(
+                            new GameObjects.Components.BoxCollider(
+                                this,
+                                new Vector2(obj.x, obj.y),
+                                new Geometry.Rect(obj.width, obj.height)
+                            )
+                        );
+                    }
+                });
+            }
+        }
     }
 
     loadTileSet(firstGid, tilesResource) {
@@ -81,10 +105,10 @@ module.exports = class extends GameObjects.GameObject {
                 layer.objects.forEach(obj => {
                     if(obj.polyline) {
                         let points = obj.polyline.map(p => new Vector2(p.x, p.y));
-                        renderer.drawPolygon(new Graphics.Polygon(points), new Vector2(obj.x, obj.y));
+                        renderer.drawPolygon(new Geometry.Polygon(points), new Vector2(obj.x, obj.y));
                     }
                     else {
-                        let rect = new Graphics.Rect(obj.width, obj.height);
+                        let rect = new Geometry.Rect(obj.width, obj.height);
                         renderer.drawPolygon(rect, new Vector2(obj.x, obj.y));
                     }
                 });

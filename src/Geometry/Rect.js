@@ -1,4 +1,4 @@
-module.exports = class extends Graphics.Polygon {
+module.exports = class extends Geometry.Polygon {
 
     constructor(w, h) {
         super();

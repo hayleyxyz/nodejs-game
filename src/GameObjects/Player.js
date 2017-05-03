@@ -17,6 +17,12 @@ module.exports = class extends GameObjects.GameObject {
             )
         );
 
+        this.addComponent(
+            new GameObjects.Components.Collider(
+                this
+            )
+        );
+
         this.speed = 100;
     }
 
