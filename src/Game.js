@@ -7,7 +7,7 @@ module.exports = class {
         this.renderer.clear();
 
         this.resources = new Resources.Manager(
-            path.join(__dirname, '..', 'resources')    
+            path.join(__dirname, '..', 'resources')
         );
 
         this.input = new Input.Manager();
@@ -19,7 +19,7 @@ module.exports = class {
     }
 
     tick(time) {
-        let delta = (time - this.lastTime);
+        let delta = (time - this.lastTime) / 1000;
 
         this.update(delta);
         this.draw(this.renderer);
@@ -30,23 +30,12 @@ module.exports = class {
     }
 
     update(deltaTime) {
-        this.gameObjects.forEach(o => {
-            if(o.update) {
-                o.update(deltaTime)
-            }
-        });
+        this.gameObjects.forEach(o => o.update(deltaTime));
     }
 
     draw(renderer) {
         renderer.clear();
-
-        //renderer.drawText(new Vector2(100, 100), 'hihi');
-
-        this.gameObjects.forEach(o => {
-            if(o.draw) {
-                o.draw(renderer);
-            }
-        });
+        this.gameObjects.forEach(o => o.draw(renderer));
     }
 
 }

@@ -6,6 +6,20 @@ module.exports = class {
         }
 
         this.game = game;
+
+        this.components = new GameObjects.Components.Set();
+    }
+
+    addComponent(component) {
+        this.components.add(component);
+    }
+
+    getComponents(type) {
+        return this.components.filter(c => c instanceof type);
+    }
+
+    getComponent(type) {
+        return this.components.find(c => c instanceof type);
     }
 
     get renderer() {
@@ -16,7 +30,7 @@ module.exports = class {
 
     }
 
-    draw() {
+    draw(renderer) {
 
     }
 

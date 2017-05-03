@@ -37,4 +37,17 @@ module.exports = class {
         );
     }
 
+    makeImage() {
+        let image = new Image();
+        image.src = this.url;
+        return image;
+    }
+
+    getRelative(relPath) {
+        return new Resources.Resource(
+            this.manager,
+            path.join(this.dir, relPath)
+        );
+    }
+
 };

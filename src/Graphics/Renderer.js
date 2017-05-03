@@ -41,6 +41,14 @@ module.exports = class {
         );
     }
 
+    drawImage(image, position) {
+        this.context.drawImage(
+            image,
+            position.x,
+            position.y
+        );
+    }
+
     onResize() {
         this.element.width = window.innerWidth;
         this.element.height = window.innerHeight;

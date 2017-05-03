@@ -1,12 +1,12 @@
 module.exports = class extends Util.Set {
 
-    constructor(game, iterable) {
+    constructor(gameObject, iterable) {
         super(iterable);
-        this.game = game;
+        this.gameObject = gameObject;
     }
 
     add(value) {
-        if(!(value instanceof GameObjects.GameObject)) {
+        if(!(value instanceof GameObjects.Components.GameComponent)) {
             throw new TypeError();
         }
 
