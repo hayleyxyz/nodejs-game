@@ -18,6 +18,10 @@ module.exports = class {
         this.tick();
     }
 
+    getGameObject(type) {
+        return this.gameObjects.find(c => c instanceof type);
+    }
+
     tick(time) {
         let delta = (time - this.lastTime) / 1000;
 

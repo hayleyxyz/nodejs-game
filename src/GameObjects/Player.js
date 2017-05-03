@@ -13,7 +13,7 @@ module.exports = class extends GameObjects.GameObject {
         this.addComponent(
             new GameObjects.Components.Position(
                 this,
-                new Vector2()
+                new Vector2(200, 200)
             )
         );
 
