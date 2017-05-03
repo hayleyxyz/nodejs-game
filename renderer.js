@@ -7,6 +7,10 @@ require('classloader')(
 let game = new Game();
 
 game.gameObjects.add(
+    new GameObjects.Camera(game)
+);
+
+game.gameObjects.add(
     new GameObjects.Level(
         game,
         game.resources.get('levels/level-2/level-2.json')
